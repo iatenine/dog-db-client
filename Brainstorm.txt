@@ -1,0 +1,19 @@
+Brainstorm
+HTML files:
+-Landing Page
+    *Navigation Bar
+    *Hero Image
+    *Dog cards
+    *Social Media Footer
+-Login
+    *Register an account
+    *Already have an account? >> Form to login with username/email and password
+-Listing Management
+    *Post a Listing
+    *View My Listings
+    *Edit Listings
+    *View My Favorites
+-Adoption Form
+    *Dog ID, Name, Owner
+    *Username, contact, and message
+-About Us
