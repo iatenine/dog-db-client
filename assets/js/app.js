@@ -50,7 +50,7 @@ const dbmock = [
         "adopted": false,
         "size": "medium",
         "dob": 24322110,
-        "img_src": "https://some-image.png",
+        "img_src": "https://th.bing.com/th/id/R.26ab931a8dc4081da4ce0edcc22deeb1?rik=HWfanOA6qpF5DQ&riu=http%3a%2f%2fimages6.fanpop.com%2fimage%2fphotos%2f43100000%2fcute-puppy-dogs-43117550-736-736.jpg&ehk=oNvFFrAXwIytGZL5SPx0V95EWpHGAi48IJelRlOuKMo%3d&risl=&pid=ImgRaw&r=0",
         "sex": "F",
         "vaccinated": true
     }
@@ -60,23 +60,25 @@ const result = dbmock[1];
 
 const cardContainer = document.querySelector("#cards")
 function appendCard(dog) {
+    const dogContainer = document.createElement("div");
+    dogContainer.classList = "card";
+    dogContainer.style = "width: 18rem;";
+
     const img = document.createElement("img");
-    //img.classList = "card-img-top";
+    img.classList = "card-img-top";
     img.src = dog["img_src"];
-    img.width = 200;
 
     const card = document.createElement("div");
-    const div = document.createElement("div");
-    //div.classList = "card-body";
+    card.classList = "card-body";
 
     const p = document.createElement("p");
-    //p.classList = "card-body";
+    p.classList = "card-text";
     p.textContent = dog["name"];
 
-    card.append(img);
-    card.append(div);
-    div.append(p);
-    cardContainer.append(card);
+    dogContainer.append(img);
+    dogContainer.append(card);
+    card.append(p);
+    cardContainer.append(dogContainer);
 }
 
 for (let i = 0; i < dbmock.length; i++) {
