@@ -6,6 +6,55 @@ img {
     padding: 10px;
 }
 
+.hero {
+    background-image: url(../media/yellowTexture.jpg);
+    background-repeat: repeat;
+    display: flex;
+}
+
+.hero > .col-md-4{
+    margin: auto;
+} 
+
 .card {
     margin: 1rem;
+}
+
+.card-text {
+    margin: 0;
+}
+
+.adoptMe {
+    border-top-left-radius:25px;
+    border-top-right-radius:25px;
+    border-bottom-right-radius:25px;
+    border-bottom-left-radius:25px;
+    border-color:burlywood;
+    background-color: blanchedalmond;
+}
+
+.cardBox {
+    margin-right: 5vw;
+    margin-left: 5vw;
+    justify-content: center;
+}
+
+/*----Navigation Bar----*/
+.navbar {
+    background-color: black;
+}
+.nav-link {
+    color: white;
+}
+
+/*----Social Media Links----*/
+.socialMedia {
+    background-color: black;
+    text-align: center;
+    padding: 6em;
+}
+
+.socialMedia > a {
+    text-decoration: none;
+    color: white;
 }
