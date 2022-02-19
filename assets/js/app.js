@@ -3,7 +3,6 @@ const cardContainer = document.querySelector("#cards");
 const init = async () => {
   const result = await fetch("http://localhost:8080/dogs/search");
   const data = await result.json();
-  console.log(data);
 
   for (let i = 0; i < data.length; i++) {
     data[i]["src"] = data[i]["src"] || "assets/media/JacksDog.jpg";
@@ -79,7 +78,13 @@ function appendCard(dog) {
   const adoptMe = document.createElement("button");
   adoptMe.classList.add("adoptMe");
   adoptMe.classList.add("mt-auto");
-  adoptMe.textContent = "Adopt Me";
+  if (localStorage.getItem("token")) {
+    adoptMe.textContent = "Adopt Me!";
+  } else {
+    // Add disabled attribute to button
+    adoptMe.setAttribute("disabled", "disabled");
+    adoptMe.textContent = "Login to Adopt Me!";
+  }
 
   dogContainer.append(img);
   dogContainer.append(card);
