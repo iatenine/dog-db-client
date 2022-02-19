@@ -42,22 +42,23 @@ function appendCard(dog) {
 
   //Name
   const name = document.createElement("p");
-  name.classList = "card-text";
-  name.textContent = "Hello, my name is " + dog["name"] + "!";
+  name.classList = "card-title, fw-bold text-center fs-4";
+  name.textContent = dog["name"] ?? "Name Me!";
   //Breed
   const breed = document.createElement("p");
   breed.classList = "card-text";
-  breed.textContent = "Breed: " + dog["breed"];
+  console.log(dog["breed"] == null);
+  breed.textContent = `Breed: ${dog["breed"]?.name ?? "unknown"}`;
   //Size
   const size = document.createElement("p");
   size.classList = "card-text";
-  size.textContent = "Size: " + dog["size"];
+  size.textContent = "Size: " + getSize(dog["size"]);
   //Date of Birth
   const dob = document.createElement("p");
   dob.classList = "card-text";
   dob.textContent =
     "Date of Birth: " +
-    dog["dob"].toLocaleString("en-US", {
+    new Date(dog["dob"]).toLocaleString("en-US", {
       year: "numeric",
       month: "long",
       day: "numeric",
