@@ -1,3 +1,4 @@
+const container = document.querySelector("#login-stuff");
 const usernameInput = document.getElementById("username");
 const email = document.getElementById("email");
 const passwordInput = document.getElementById("password");
@@ -10,6 +11,13 @@ const enterPhone = document.getElementById("enterPhoneNumber");
 const enterPassword = document.getElementById("enterPassword");
 const registerButton = document.getElementById("button2");
 //name, username, email, phone, password
+
+const loginUser = (result) => {
+  const token = result.token;
+  if (!token) return;
+  localStorage.setItem("token", JSON.stringify(token));
+  container.style.display = "none";
+};
 
 loginButton.addEventListener("click", async () => {
   var myHeaders = new Headers();
@@ -29,8 +37,7 @@ loginButton.addEventListener("click", async () => {
   try {
     const response = await fetch("http://localhost:8080/login", requestOptions);
     const result = await response.json();
-    const token = result.token;
-    if (token) localStorage.setItem("token", JSON.stringify(token));
+    loginUser(result);
   } catch (error) {
     console.log("error", error);
   }
@@ -61,9 +68,12 @@ registerButton.addEventListener("click", async () => {
       requestOptions
     );
     const result = await response.json();
-    const token = result.token;
-    if (token) localStorage.setItem("token", JSON.stringify(token));
+    loginUser(result);
   } catch (error) {
     console.log("error", error);
   }
 });
+
+if (localStorage.getItem("token")) {
+  container.style.display = "none";
+}
