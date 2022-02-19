@@ -1,6 +1,7 @@
 const container = document.querySelector("#login-stuff");
+const navLoginBtn = document.querySelector("#nav-login-btn");
+
 const usernameInput = document.getElementById("username");
-const email = document.getElementById("email");
 const passwordInput = document.getElementById("password");
 const loginButton = document.getElementById("loginButton");
 
@@ -22,7 +23,8 @@ const loginUser = (result) => {
   const token = result.token;
   if (!token) return;
   localStorage.setItem("token", JSON.stringify(token));
-  container.style.display = "none";
+  // Refresh the page
+  window.location.reload();
 };
 
 loginButton.addEventListener("click", async () => {
@@ -30,8 +32,8 @@ loginButton.addEventListener("click", async () => {
   myHeaders.append("Content-Type", "application/json");
 
   var raw = JSON.stringify({
-    username: "JWTTest",
-    password: "password",
+    username: usernameInput.value,
+    password: passwordInput.value,
   });
 
   var requestOptions = {
@@ -80,6 +82,14 @@ registerButton.addEventListener("click", async () => {
   }
 });
 
+container.style.display = "none";
+
+// Check if user has a token
 if (localStorage.getItem("token")) {
-  container.style.display = "none";
+  // Update to logout button if user has a token
+  navLoginBtn.innerHTML = "Logout";
+  navLoginBtn.addEventListener("click", () => {
+    localStorage.removeItem("token");
+    window.location.reload();
+  });
 }
