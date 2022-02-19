@@ -153,7 +153,7 @@ async function makeAuthenticatedRequest(method, url, body) {
   myHeaders.append("Authorization", `${token.replace(/['"]+/g, "")}`);
   myHeaders.append("Content-Type", "application/json");
 
-  var raw = JSON.stringify({ body });
+  var raw = JSON.stringify(body);
 
   var requestOptions = {
     method,

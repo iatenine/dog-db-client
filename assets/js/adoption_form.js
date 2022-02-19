@@ -1,28 +1,41 @@
-const username = document.getElementById("username");
-const email = document.getElementById("email");
-const password = document.getElementById("password");;
-const button = document.getElementById("button");
+const baseUrl = "http://localhost:8080";
 
-const enterName = document.getElementById("enterName");
-const enterUsername = document.getElementById("enterUsername");
-const enterEmail = document.getElementById("enterEmail");
-const enterPhone = document.getElementById("enterPhoneNumber");
-const enterPassword = document.getElementById("enterPassword ");
-const button2 = document.getElementById("button2");
-//name, username, email, phone, password
+async function listDog() {
+  const name = document.getElementById("dogName").value;
+  const breed = document.getElementById("dog-breed").value;
+  const dogAge = document.getElementById("dogAge").value;
+  const vaccinated = document.getElementById("vaccinated").checked;
+  const sizeRadios = document.getElementsByName("size");
+  const sexRadios = document.getElementsByName("sex");
+  const dob = new Date(dogAge).getTime();
+  const sex = getCheckedRadio(sexRadios);
+  const size = getCheckedRadio(sizeRadios);
 
+  console.log(getCheckedRadio(sizeRadios));
+  console.log(getCheckedRadio(sexRadios));
+  console.log(dob);
+  console.log(vaccinated);
+  console.log(dob);
+  console.log(name);
 
+  // Breed only works when enums are available
 
-button.addEventListener("click", () => {
-    console.log(username.value);
-    console.log(email.value);
-    console.log(password.value);
-    });
+  const res = await makeAuthenticatedRequest(
+    "POST",
+    `${baseUrl}/users/newdog`,
+    {
+      name,
+      dob,
+      sex,
+      vaccinated,
+      size,
+    }
+  );
+  console.log(res);
+}
 
-button2.addEventListener("click", () => {
-    console.log(enterName.value);
-    console.log(enterUsername.value);
-    console.log(enterEmail.value);
-    console.log(enterPhoneNumber.value);
-    console.log(enterPassword.value);
-    });
+function getCheckedRadio(radios) {
+  for (const radio of radios) {
+    if (radio.checked) return radio.value;
+  }
+}
