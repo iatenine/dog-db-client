@@ -78,6 +78,10 @@ function appendCard(dog) {
   const adoptMe = document.createElement("button");
   adoptMe.classList.add("adoptMe");
   adoptMe.classList.add("mt-auto");
+  adoptMe.onclick = applyToAdopt(dog["id"]);
+
+  adoptMe.id = `adoptMeBtn-${dog["id"]}`;
+
   if (localStorage.getItem("token")) {
     adoptMe.textContent = "Adopt Me!";
   } else {
@@ -96,6 +100,42 @@ function appendCard(dog) {
   card.append(vacc);
   card.append(adoptMe);
   cardContainer.append(dogContainer);
+}
+
+function applyToAdopt(dogId) {
+  return async function sumbitApplication() {
+    const btnRef = document.getElementById(`adoptMeBtn-${dogId}`);
+    try {
+      const res = await makeAuthenticatedRequest(
+        "POST",
+        `http://localhost:8080/applicants/apply/${dogId}`,
+        {}
+      );
+      btnRef.disabled = true;
+      btnRef.textContent = "Applied";
+    } catch (err) {
+      btnRef.textContent = "Request Failed, Try again";
+    }
+  };
+}
+
+async function makeAuthenticatedRequest(method, url, body) {
+  var myHeaders = new Headers();
+  const token = localStorage.getItem("token");
+  myHeaders.append("Authorization", `${token.replace(/['"]+/g, "")}`);
+  myHeaders.append("Content-Type", "application/json");
+
+  var raw = JSON.stringify({ body });
+
+  var requestOptions = {
+    method,
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow",
+  };
+
+  const result = await fetch(url, requestOptions);
+  return result;
 }
 
 // function getCharacterById() {
