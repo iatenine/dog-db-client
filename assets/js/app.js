@@ -30,6 +30,15 @@ function appendCard(dog) {
   dogContainer.classList = "card";
   dogContainer.style = "width: 18rem;";
 
+  if (localStorage.getItem("token")) {
+    const saveBtn = document.createElement("button");
+    saveBtn.classList = "btn btn-primary";
+    saveBtn.id = `saveBtn-${dog.id}`;
+    saveBtn.textContent = "Save";
+    saveBtn.onclick = saveForLater(dog.id);
+    dogContainer.append(saveBtn);
+  }
+
   const img = document.createElement("img");
   img.classList = "card-img-top";
   img.src = dog["src"];
@@ -102,11 +111,30 @@ function appendCard(dog) {
   cardContainer.append(dogContainer);
 }
 
+function saveForLater(dogId) {
+  return async function save() {
+    const btnRef = document.getElementById(`saveBtn-${dogId}`);
+    try {
+      const res = await makeAuthenticatedRequest(
+        "POST",
+        `http://localhost:8080/applicants/save/${dogId}`,
+        {}
+      );
+      console.log(res);
+      btnRef.disabled = true;
+      btnRef.textContent = "Saved";
+    } catch (err) {
+      console.error(err);
+      btnRef.textContent = "Request Failed, Try again";
+    }
+  };
+}
+
 function applyToAdopt(dogId) {
   return async function sumbitApplication() {
     const btnRef = document.getElementById(`adoptMeBtn-${dogId}`);
     try {
-      const res = await makeAuthenticatedRequest(
+      await makeAuthenticatedRequest(
         "POST",
         `http://localhost:8080/applicants/apply/${dogId}`,
         {}
