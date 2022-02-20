@@ -11,12 +11,7 @@ async function listDog() {
   const sex = getCheckedRadio(sexRadios);
   const size = getCheckedRadio(sizeRadios);
 
-  console.log(getCheckedRadio(sizeRadios));
-  console.log(getCheckedRadio(sexRadios));
-  console.log(dob);
-  console.log(vaccinated);
-  console.log(dob);
-  console.log(name);
+  console.log(dob); // Getting set off by a day
 
   // Breed only works when enums are available
 
@@ -31,7 +26,10 @@ async function listDog() {
       size,
     }
   );
-  console.log(res);
+
+  if (res.status !== 200) {
+    console.error("Something went wrong: ", res);
+  }
 }
 
 function getCheckedRadio(radios) {

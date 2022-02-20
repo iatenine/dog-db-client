@@ -18,13 +18,13 @@
           <a class="nav-link" href="#">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">List Dog</a>
+          <a class="nav-link" onclick="toggleHidableSections('dog-registration')">List Dog</a>
         </li>
       </ul>
       <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
         <ul class="navbar-nav ">
           <li class="nav-item">
-            <a class="nav-link" id="nav-login-btn" onclick="toggleLoginDisplay()">Login</a>
+            <a class="nav-link" id="nav-login-btn" onclick="toggleHidableSections('login-stuff')">Login</a>
           </li>
         </ul>
       </div>
@@ -32,7 +32,7 @@
   </nav>
 
   <!-- Login Form -->
-  <section class="row" id="login-stuff">
+  <section class="row hidable" id="login-stuff">
 
     <div class="span6">
       <div class="form-signin">
@@ -62,7 +62,7 @@
   </section>
 
   <!-- Register new dog (add dog you own or list for adoption) -->
-  <section>
+  <section class="hidable" id="dog-registration">
     <div class="container">
       <div class="row">
         <div class="col-md-12">

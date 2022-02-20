@@ -166,15 +166,4 @@ async function makeAuthenticatedRequest(method, url, body) {
   return result;
 }
 
-// function getCharacterById() {
-//   console.log("getting dog by breed");
-
-//   const breed = document.getElementById("idInput").value;
-//   for (let i = 0; i < dbmock.length; i++) {
-//     if (dbmock[i]["breed"] == breed) {
-//       appendCard(dbmock[i]);
-//     }
-//   }
-// }
-
 init();

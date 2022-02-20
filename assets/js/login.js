@@ -11,13 +11,31 @@ const enterEmail = document.getElementById("enterEmail");
 const enterPhone = document.getElementById("enterPhoneNumber");
 const enterPassword = document.getElementById("enterPassword");
 const registerButton = document.getElementById("button2");
-//name, username, email, phone, password
 
-const toggleLoginDisplay = () => {
-  container.style.display == "none"
-    ? (container.style.display = "block")
-    : (container.style.display = "none");
+let currentVisibleSection = "";
+
+const toggleLoginDisplay = (arg) => {
+  console.log("hello", arg);
+  toggleHidableSections("login");
 };
+const toggleDogRegistration = () => {
+  toggleHidableSections("dog-registration");
+};
+
+function toggleHidableSections(sectionId) {
+  const sections = document.querySelectorAll(".hidable");
+  if (currentVisibleSection === sectionId) {
+    currentVisibleSection = "";
+  } else {
+    currentVisibleSection = sectionId;
+  }
+  sections.forEach((section) => {
+    section.style.display = "none";
+    if (section.id == currentVisibleSection) {
+      section.style.display = "block";
+    }
+  });
+}
 
 const loginUser = (result) => {
   const token = result.token;
@@ -82,14 +100,13 @@ registerButton.addEventListener("click", async () => {
   }
 });
 
-container.style.display = "none";
+toggleHidableSections(-1);
 
 // Check if user has a token
 if (localStorage.getItem("token")) {
-  // Update to logout button if user has a token
   navLoginBtn.innerHTML = "Logout";
-  navLoginBtn.addEventListener("click", () => {
+  navLoginBtn.onclick = () => {
     localStorage.removeItem("token");
     window.location.reload();
-  });
+  };
 }
