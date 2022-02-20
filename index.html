@@ -18,13 +18,13 @@
           <a class="nav-link" href="#">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Adopt</a>
+          <a class="nav-link" onclick="toggleHidableSections('dog-registration')">List Dog</a>
         </li>
       </ul>
       <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
         <ul class="navbar-nav ">
           <li class="nav-item">
-            <a class="nav-link" onclick="toggleLoginDisplay()">Login</a>
+            <a class="nav-link" id="nav-login-btn" onclick="toggleHidableSections('login-stuff')">Login</a>
           </li>
         </ul>
       </div>
@@ -32,7 +32,7 @@
   </nav>
 
   <!-- Login Form -->
-  <section class="row" id="login-stuff">
+  <section class="row hidable" id="login-stuff">
 
     <div class="span6">
       <div class="form-signin">
@@ -53,12 +53,68 @@
         <label for="inputName" class="sr-only"></label>
         <input type="text" class="input-block-level" placeholder="Display Name" id="enterName">
         <label for="inputEmail" class="sr-only"></label>
-        <input type="email" class="input-block-level" placeholder="Email address" id="enterEmail">
+        <input type="email" class="input-block-level" placeholder="Email address*" id="enterEmail">
         <label for="inputPhone" class="sr-only"></label>
         <input type="text" class="input-block-level" placeholder="Phone Number" id="enterPhoneNumber">
         <button class="btn btn-large btn-primary" id="button2">Register</button>
       </div>
     </div>
+  </section>
+
+  <!-- Register new dog (add dog you own or list for adoption) -->
+  <section class="hidable" id="dog-registration">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Register a new dog</h1>
+          <div class="form-group">
+            <label for="dogName">Dog Name</label>
+            <input type="text" class="form-control" id="dogName" placeholder="Enter dog name">
+          </div>
+          <div class="form-group">
+            <label for="dog-breed">Dog Breed</label>
+            <div>
+              <select id="dog-breed" class="dropdown">
+                <option>Mix</option>
+                <option>German Shepherd</option>
+                <option>Labrador Retriever</option>
+                <option>Golden Retriever</option>
+                <option>Great Pyrenees</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="dogAge">Dog Age</label>
+            <input type="date" class="form-control" id="dogAge" placeholder="Enter dog age">
+          </div>
+          <div class="form-group">
+            <label for="sex">Dog Gender</label>
+            <div id="dogGender">
+              M <input type="radio" value="M" name="sex" />
+              F <input type="radio" value="F" name="sex" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="vaccinated">Vaccinated</label>
+            <input type="checkbox" id="vaccinated" />
+          </div>
+
+          <div class="form-group">
+            <label for="size">Size</label>
+            <div>
+              <div>
+                Small (Up to 15 lbs) <input type="radio" value="1" name="size" />
+              </div>
+              <div>
+                Medium (Up to 25 lbs) <input type="radio" value="2" name="size" />
+              </div>
+              <div>
+                Large (Up to 35 lbs) <input type="radio" value="3" name="size" />
+              </div>
+            </div>
+          </div>
+
+          <button class="btn btn-primary" onclick="listDog()">List Dog</button>
 
   </section>
 
@@ -117,5 +173,6 @@
 </body>
 <script src="assets/js/login.js"></script>
 <script src="assets/js/app.js"></script>
+<script src="assets/js/adoption_form.js"></script>
 
 </html>
