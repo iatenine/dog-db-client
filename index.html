@@ -14,11 +14,11 @@
   <nav class="navbar navbar-expand-lg">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home</a>
-        </li>
         <li class="nav-item">
           <a class="nav-link" onclick="toggleHidableSections('dog-registration')">List Dog</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" onclick="revealMyDogs()">My Dogs</a>
         </li>
       </ul>
       <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
@@ -118,6 +118,10 @@
 
   </section>
 
+  <!-- My Dogs -->
+  <section class="hidable" id="my-dogs">
+  </section>
+
   <!--Hero Image-->
   <div class="container-fluid">
     <div class="row hero">
@@ -138,34 +142,18 @@
   <hr>
 
   <!--Dog Cards-->
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6">
-        <nav aria-label="Page navigation example">
-          <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
-          </ul>
-        </nav>
-      </div>
-      <div class="col-md-6">
-        <label for="idInput">Breed:</label>
-        <input type="text" id="idInput" value="breed" />
-        <button onclick="getCharacterById()">Get Pup By Breed</button>
-        <br>
-      </div>
-    </div>
-  </div>
+  <h1>
+    <center id="page-title">
+      Listings
+    </center>
+  </h1>
 
   <div id="cards" class="row cardBox"></div>
   <hr>
 
   <!--Social Media Links-->
   <div class="socialMedia">
-    <a href="#home"> Contact Us </a>|<a href="#login"> Log In </a>|<a href="#about"> About </a>
+    <a href="#home"> Contact Us </a>|<a href="#about"> About </a>
     <p>&#169 2022</p>
   </div>
 
@@ -173,6 +161,7 @@
 </body>
 <script src="assets/js/login.js"></script>
 <script src="assets/js/app.js"></script>
+<script src="assets/js/myDogs.js"></script>
 <script src="assets/js/adoption_form.js"></script>
 
 </html>

@@ -14,14 +14,6 @@ const registerButton = document.getElementById("button2");
 
 let currentVisibleSection = "";
 
-const toggleLoginDisplay = (arg) => {
-  console.log("hello", arg);
-  toggleHidableSections("login");
-};
-const toggleDogRegistration = () => {
-  toggleHidableSections("dog-registration");
-};
-
 function toggleHidableSections(sectionId) {
   const sections = document.querySelectorAll(".hidable");
   if (currentVisibleSection === sectionId) {
@@ -32,7 +24,7 @@ function toggleHidableSections(sectionId) {
   sections.forEach((section) => {
     section.style.display = "none";
     if (section.id == currentVisibleSection) {
-      section.style.display = "block";
+      section.style.display = "flex";
     }
   });
 }
