@@ -1,60 +1,65 @@
 body {
-    background-color: lightgreen;
+  background-color: lightgreen;
 }
 
 img {
-    padding: 10px;
+  padding: 10px;
+}
+
+#my-dogs {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .hero {
-    background-image: url(../media/yellowTexture.jpg);
-    background-repeat: repeat;
-    display: flex;
+  background-image: url(../media/yellowTexture.jpg);
+  background-repeat: repeat;
+  display: flex;
 }
 
-.hero > .col-md-4{
-    margin: auto;
-} 
+.hero > .col-md-4 {
+  margin: auto;
+}
 
 .card {
-    margin: 1rem;
+  margin: 1rem;
 }
 
 .card-text {
-    margin: 0;
+  margin: 0;
 }
 
 .adoptMe {
-    border-top-left-radius:25px;
-    border-top-right-radius:25px;
-    border-bottom-right-radius:25px;
-    border-bottom-left-radius:25px;
-    border-color:burlywood;
-    background-color: blanchedalmond;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+  border-color: burlywood;
+  background-color: blanchedalmond;
 }
 
 .cardBox {
-    margin-right: 5vw;
-    margin-left: 5vw;
-    justify-content: center;
+  margin-right: 5vw;
+  margin-left: 5vw;
+  justify-content: center;
 }
 
 /*----Navigation Bar----*/
 .navbar {
-    background-color: black;
+  background-color: black;
 }
 .nav-link {
-    color: white;
+  color: white;
 }
 
 /*----Social Media Links----*/
 .socialMedia {
-    background-color: black;
-    text-align: center;
-    padding: 6em;
+  background-color: black;
+  text-align: center;
+  padding: 6em;
 }
 
 .socialMedia > a {
-    text-decoration: none;
-    color: white;
+  text-decoration: none;
+  color: white;
 }

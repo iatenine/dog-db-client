@@ -14,11 +14,14 @@
   <nav class="navbar navbar-expand-lg">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home</a>
-        </li>
         <li class="nav-item">
           <a class="nav-link" onclick="toggleHidableSections('dog-registration')">List Dog</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" onclick="revealMyDogs()">My Dogs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" onclick="toggleHidableSections('applicants')">Applicants</a>
         </li>
       </ul>
       <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
@@ -118,6 +121,15 @@
 
   </section>
 
+  <!-- My Dogs -->
+  <section class="hidable" id="my-dogs">
+  </section>
+
+  <!-- Applicants -->
+  <section class="hidable" id="applicants">
+    Applicants Section
+  </section>
+
   <!--Hero Image-->
   <div class="container-fluid">
     <div class="row hero">
@@ -173,6 +185,7 @@
 </body>
 <script src="assets/js/login.js"></script>
 <script src="assets/js/app.js"></script>
+<script src="assets/js/myDogs.js"></script>
 <script src="assets/js/adoption_form.js"></script>
 
 </html>

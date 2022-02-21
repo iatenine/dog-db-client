@@ -1,12 +1,9 @@
-const cardContainer = document.querySelector("#cards");
-
 const init = async () => {
   const result = await fetch("http://localhost:8080/dogs/search");
   const data = await result.json();
 
   for (let i = 0; i < data.length; i++) {
-    data[i]["src"] = data[i]["src"] || "assets/media/JacksDog.jpg";
-    appendCard(data[i]);
+    appendDogCard(document.getElementById("cards"), data[i]);
   }
 };
 
@@ -25,12 +22,17 @@ function getSize(size) {
   }
 }
 
-function appendCard(dog) {
+function appendDogCard(container, dog, owned) {
+  container.append(createCard(dog, owned));
+}
+
+function createCard(dog, owned = false) {
+  dog["src"] = dog["src"] || "assets/media/JacksDog.jpg";
   const dogContainer = document.createElement("div");
   dogContainer.classList = "card";
   dogContainer.style = "width: 18rem;";
 
-  if (localStorage.getItem("token")) {
+  if (localStorage.getItem("token") && !owned) {
     const saveBtn = document.createElement("button");
     saveBtn.classList = "btn btn-primary";
     saveBtn.id = `saveBtn-${dog.id}`;
@@ -52,15 +54,17 @@ function appendCard(dog) {
   const name = document.createElement("p");
   name.classList = "card-title, fw-bold text-center fs-4";
   name.textContent = dog["name"] ?? "Name Me!";
+
   //Breed
   const breed = document.createElement("p");
   breed.classList = "card-text";
-  console.log(dog["breed"] == null);
   breed.textContent = `Breed: ${dog["breed"]?.name ?? "unknown"}`;
+
   //Size
   const size = document.createElement("p");
   size.classList = "card-text";
   size.textContent = "Size: " + getSize(dog["size"]);
+
   //Date of Birth
   const dob = document.createElement("p");
   dob.classList = "card-text";
@@ -71,17 +75,16 @@ function appendCard(dog) {
       month: "long",
       day: "numeric",
     });
+
   //Sex
   const sex = document.createElement("p");
   sex.classList = "card-text";
   sex.textContent = "Sex: " + dog["sex"];
+
   //Vaccinated
   const vacc = document.createElement("p");
+  const result = dog["vaccinated"] ? "Yes" : "No";
   vacc.classList = "card-text";
-  let result = "Yes";
-  if (!dog["vaccinated"]) {
-    result = "No";
-  }
   vacc.textContent = "Vaccinated: " + result;
 
   const adoptMe = document.createElement("button");
@@ -91,8 +94,11 @@ function appendCard(dog) {
 
   adoptMe.id = `adoptMeBtn-${dog["id"]}`;
 
-  if (localStorage.getItem("token")) {
+  if (localStorage.getItem("token") && !owned) {
     adoptMe.textContent = "Adopt Me!";
+  } else if (owned) {
+    adoptMe.textContent = "View Applicants";
+    adoptMe.onclick = getApplicants(dog);
   } else {
     // Add disabled attribute to button
     adoptMe.setAttribute("disabled", "disabled");
@@ -108,7 +114,7 @@ function appendCard(dog) {
   card.append(sex);
   card.append(vacc);
   card.append(adoptMe);
-  cardContainer.append(dogContainer);
+  return dogContainer;
 }
 
 function saveForLater(dogId) {
