@@ -1,11 +1,14 @@
+let breedList = [];
+
 const init = async () => {
-  populateBreedOptions();
   const result = await fetch("http://localhost:8080/dogs/search");
   const data = await result.json();
 
   for (let i = 0; i < data.length; i++) {
     appendDogCard(document.getElementById("cards"), data[i]);
   }
+  breedList = await getAllBreeds();
+  populateBreedOptions(breedList.message);
 };
 
 /*Takes in a number and returns the size*/
@@ -27,6 +30,19 @@ function appendDogCard(container, dog, owned) {
   container.append(createCard(dog, owned));
 }
 
+async function getPlaceholder(dog, imgElement) {
+  const res = await fetch(
+    `https://dog.ceo/api/breed/${dog.breed?.name || "mix"}/images/random`
+  );
+  const data = await res.json();
+  imgElement.src = data.message;
+  // TODO: Add centered class once image is contained within a div that has a class of container
+  imgElement.insertAdjacentHTML(
+    "afterend",
+    `<figcaption class="text-center fst-italic" title="This image is provied if the user hasn't uploaded an image">&#9888; Placeholder</figcaption>`
+  );
+}
+
 function createCard(dog, owned = false) {
   dog["src"] = dog["src"] || "assets/media/JacksDog.jpg";
   const dogContainer = document.createElement("div");
@@ -45,6 +61,9 @@ function createCard(dog, owned = false) {
   const img = document.createElement("img");
   img.classList = "card-img-top";
   img.src = dog["src"];
+  if (dog["src"] === "assets/media/JacksDog.jpg") {
+    getPlaceholder(dog, img);
+  }
 
   const card = document.createElement("div");
   card.classList.add("card-body");
@@ -245,7 +264,8 @@ getBreedNames().then((result) => {
   console.log("Encoded breed: ", encodeBreed("Labrador Retriever"));
 });
 
-async function populateBreedOptions() {
+async function populateBreedOptions(breedNameObject) {
+  // console.log(breedNames);
   const breedNames = await getBreedNames();
   const breedSelect = document.getElementById("dog-breed");
 

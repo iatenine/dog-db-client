@@ -10,6 +10,7 @@ async function listDog() {
   const dob = new Date(dogAge).getTime();
   const sex = getCheckedRadio(sexRadios);
   const size = getCheckedRadio(sizeRadios);
+  const src = document.querySelector("#src").value;
 
   console.log(dob); // Getting set off by a day
 
@@ -24,6 +25,7 @@ async function listDog() {
       sex,
       vaccinated,
       size,
+      src,
       breed: {
         name: breed,
         averageWeight: size,
