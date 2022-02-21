@@ -26,8 +26,8 @@ function getSize(size) {
   }
 }
 
-function appendDogCard(container, dog, owned) {
-  container.append(createCard(dog, owned));
+function appendDogCard(container, dog, owned, saved) {
+  container.append(createCard(dog, owned, saved));
 }
 
 async function getPlaceholder(dog, imgElement) {
@@ -49,13 +49,15 @@ function createCard(dog, owned = false) {
   dogContainer.classList = "card";
   dogContainer.style = "width: 18rem;";
 
-  if (localStorage.getItem("token") && !owned) {
+  if (localStorage.getItem("token") && !owned && !saved) {
     const saveBtn = document.createElement("button");
     saveBtn.classList = "btn btn-primary";
     saveBtn.id = `saveBtn-${dog.id}`;
     saveBtn.textContent = "Save";
     saveBtn.onclick = saveForLater(dog.id);
     dogContainer.append(saveBtn);
+    console.log(saved);
+
   }
 
   const img = document.createElement("img");

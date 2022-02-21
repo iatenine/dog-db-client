@@ -84,3 +84,21 @@ function approveUser(id, dogId) {
     console.log(data);
   };
 }
+
+async function savedDogs() {
+  toggleHidableSections("my-dogs");
+  // Remove all children of the cards div
+  const cards = document.getElementById("my-dogs");
+  while (cards.firstChild) {
+    cards.removeChild(cards.firstChild);
+  }
+  const res = await makeAuthenticatedRequest(
+    "GET",
+    "http://localhost:8080/users/mysaveddogs"
+  );
+  const dogs = await res.json();
+  console.log(dogs);
+  dogs.forEach((dog) => {
+    appendDogCard(document.querySelector("#my-dogs"), dog, false, true);
+  });
+}
