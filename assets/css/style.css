@@ -63,3 +63,18 @@ img {
   text-decoration: none;
   color: white;
 }
+
+/* Image and text need to be in an element with this class */
+.container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+/* Overlay text in middle of image */
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
