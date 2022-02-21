@@ -1,4 +1,5 @@
 const init = async () => {
+  populateBreedOptions();
   const result = await fetch("http://localhost:8080/dogs/search");
   const data = await result.json();
 
@@ -105,13 +106,12 @@ function createCard(dog, owned = false, saved = false) {
     //Delisting dog
     const delistDog = document.createElement("button");
 
-    if(!dog.adopted){
+    if (!dog.adopted) {
       delistDog.textContent = "Delist Dog";
-      delistDog.onclick = removeDogFromList(dog,false, delistDog);
-    }
-    else{
-       delistDog.textContent = "Release Dog";
-       delistDog.onclick = removeDogFromList(dog,true, delistDog);
+      delistDog.onclick = removeDogFromList(dog, false, delistDog);
+    } else {
+      delistDog.textContent = "Release Dog";
+      delistDog.onclick = removeDogFromList(dog, true, delistDog);
     }
     card.append(delistDog);
   } else {
@@ -187,23 +187,76 @@ async function makeAuthenticatedRequest(method, url, body) {
   return result;
 }
 
-function removeDogFromList(dog, isListing, button){
-     return async function sumbitApplication() {
-         const res = await makeAuthenticatedRequest(
-              "PUT",
-              `http://localhost:8080/users/${isListing ? "listDog": "removelisting"}/${dog.id}`
-            );
-            const applicants = await res.text();
-            console.log(applicants);
-            
-            if(res.status == 200){
-                button.textContent = "Updated!";
-                button.disabled = true;
-            }
-            else{
-              button.textContent = "Something went wrong!";
-            }
-     }
+function removeDogFromList(dog, isListing, button) {
+  return async function sumbitApplication() {
+    const res = await makeAuthenticatedRequest(
+      "PUT",
+      `http://localhost:8080/users/${isListing ? "listDog" : "removelisting"}/${
+        dog.id
+      }`
+    );
+    const applicants = await res.text();
+    console.log(applicants);
+
+    if (res.status == 200) {
+      button.textContent = "Updated!";
+      button.disabled = true;
+    } else {
+      button.textContent = "Something went wrong!";
+    }
+  };
+}
+
+// Call endpoint to get all breeds
+async function getAllBreeds() {
+  const res = await fetch("https://dog.ceo/api/breeds/list/all");
+  const breeds = await res.json();
+  return breeds;
+}
+// Convert object of breeds into array of strings
+async function getBreedNames() {
+  const result = await getAllBreeds();
+  const breeds = result.message;
+  const breedNames = [];
+  // Iterate through keys of breeds
+  Object.keys(breeds).forEach((key) => {
+    if (breeds[key].length === 0) {
+      breedNames.push(key);
+    } else {
+      breeds[key].forEach((breed) => {
+        breedNames.push(breed + " " + key);
+      });
+    }
+  });
+
+  return breedNames;
+}
+// Convert a string from human-readable to url-encoded
+function encodeBreed(breed) {
+  breed = breed.toLowerCase();
+  const splitBreed = breed.split(" ");
+  if (splitBreed.length === 1) {
+    return breed;
+  }
+  // Reverse array
+  return splitBreed.reverse().join("/");
+}
+
+getBreedNames().then((result) => {
+  console.log(result);
+  console.log("Encoded breed: ", encodeBreed("Labrador Retriever"));
+});
+
+async function populateBreedOptions() {
+  const breedNames = await getBreedNames();
+  const breedSelect = document.getElementById("dog-breed");
+
+  breedNames.forEach((breed) => {
+    const option = document.createElement("option");
+    option.value = encodeBreed(breed);
+    option.textContent = breed;
+    breedSelect.append(option);
+  });
 }
 
 init();

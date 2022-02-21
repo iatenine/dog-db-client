@@ -24,6 +24,10 @@ async function listDog() {
       sex,
       vaccinated,
       size,
+      breed: {
+        name: breed,
+        averageWeight: size,
+      },
     }
   );
 
