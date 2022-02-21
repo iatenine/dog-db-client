@@ -99,6 +99,19 @@ function createCard(dog, owned = false) {
   } else if (owned) {
     adoptMe.textContent = "View Applicants";
     adoptMe.onclick = getApplicants(dog);
+
+    //Delisting dog
+    const delistDog = document.createElement("button");
+
+    if(!dog.adopted){
+      delistDog.textContent = "Delist Dog";
+      delistDog.onclick = removeDogFromList(dog,false, delistDog);
+    }
+    else{
+       delistDog.textContent = "Release Dog";
+       delistDog.onclick = removeDogFromList(dog,true, delistDog);
+    }
+    card.append(delistDog);
   } else {
     // Add disabled attribute to button
     adoptMe.setAttribute("disabled", "disabled");
@@ -170,6 +183,25 @@ async function makeAuthenticatedRequest(method, url, body) {
 
   const result = await fetch(url, requestOptions);
   return result;
+}
+
+function removeDogFromList(dog, isListing, button){
+     return async function sumbitApplication() {
+         const res = await makeAuthenticatedRequest(
+              "PUT",
+              `http://localhost:8080/users/${isListing ? "listDog": "removelisting"}/${dog.id}`
+            );
+            const applicants = await res.text();
+            console.log(applicants);
+            
+            if(res.status == 200){
+                button.textContent = "Updated!";
+                button.disabled = true;
+            }
+            else{
+              button.textContent = "Something went wrong!";
+            }
+     }
 }
 
 init();
