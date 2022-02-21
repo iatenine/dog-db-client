@@ -64,6 +64,10 @@ img {
   color: white;
 }
 
+.close {
+  border: 0;
+}
+
 /* Image and text need to be in an element with this class */
 .container {
   position: relative;
