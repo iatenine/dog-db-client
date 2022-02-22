@@ -4,6 +4,7 @@ body {
 
 img {
   padding: 10px;
+  height: 20em;
 }
 
 #my-dogs {
@@ -25,8 +26,16 @@ img {
   margin: 1rem;
 }
 
+.card-img {
+  height: 20em !important;
+}
+
 .card-text {
   margin: 0;
+}
+
+.save-btn {
+  margin: 0.5em;
 }
 
 .adoptMe {
