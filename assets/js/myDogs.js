@@ -10,7 +10,6 @@ async function revealMyDogs() {
     "http://localhost:8080/users/mydogs"
   );
   const dogs = await res.json();
-  console.log(dogs);
   dogs.forEach((dog) => {
     appendDogCard(document.querySelector("#my-dogs"), dog, true);
   });
