@@ -60,6 +60,13 @@ img {
 .nav-link {
   color: white;
 }
+.registerForm {
+  background-color:darkseagreen;
+  border: 1rem;
+  border-radius: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
 
 /*----Social Media Links----*/
 .socialMedia {
@@ -75,6 +82,11 @@ img {
 
 .close {
   border: 0;
+}
+
+.dogIcon {
+  width: 40%;
+  height: auto;
 }
 
 /* Image and text need to be in an element with this class */
