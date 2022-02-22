@@ -31,7 +31,7 @@ function toggleHidableSections(sectionId) {
 
 const loginUser = (result) => {
   const token = result.token;
-  if (!token) return;
+  if (!token) alert("Login failed");
   localStorage.setItem("token", JSON.stringify(token));
   // Refresh the page
   window.location.reload();
@@ -57,7 +57,7 @@ loginButton.addEventListener("click", async () => {
     const result = await response.json();
     loginUser(result);
   } catch (error) {
-    console.log("error", error);
+    alert("Login failed");
   }
 });
 
@@ -72,6 +72,11 @@ registerButton.addEventListener("click", async () => {
     username: enterUsername.value,
     password: enterPassword.value,
   });
+
+  if (!enterEmail || !username || !password) {
+    alert("Please fill out all required fields");
+    return;
+  }
 
   var requestOptions = {
     method: "POST",
@@ -88,7 +93,7 @@ registerButton.addEventListener("click", async () => {
     const result = await response.json();
     loginUser(result);
   } catch (error) {
-    console.log("error", error);
+    console.error("error", error);
   }
 });
 

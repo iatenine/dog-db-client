@@ -1,10 +1,7 @@
 async function revealMyDogs() {
   toggleHidableSections("my-dogs");
   // Remove all children of the cards div
-  const cards = document.getElementById("my-dogs");
-  while (cards.firstChild) {
-    cards.removeChild(cards.firstChild);
-  }
+  clearMyDogs();
   const res = await makeAuthenticatedRequest(
     "GET",
     "http://localhost:8080/users/mydogs"
@@ -15,6 +12,13 @@ async function revealMyDogs() {
   });
 }
 
+function clearMyDogs() {
+  const cards = document.getElementById("my-dogs");
+  while (cards.firstChild) {
+    cards.removeChild(cards.firstChild);
+  }
+}
+
 function getApplicants(dog) {
   return async function getApplicants() {
     const res = await makeAuthenticatedRequest(
@@ -22,7 +26,7 @@ function getApplicants(dog) {
       `http://localhost:8080/applicants/dog/${dog.id}`
     );
     const applicants = await res.json();
-    console.log("Applicants: ", applicants);
+    clearMyDogs();
     applicants.forEach((user) => {
       const container = document.querySelector("#my-dogs");
       const card = buildApplicantCard(user, dog);
@@ -49,12 +53,22 @@ function buildApplicantCard(user, dog) {
   //Name
   const name = document.createElement("p");
   name.classList = "card-title, fw-bold text-center fs-4";
-  name.textContent = user["legalName"] ?? user["username"];
+  name.textContent = user["legalName"] || user["username"];
 
   // Applied for...
   const appliedFor = document.createElement("p");
   appliedFor.classList = "card-text";
   appliedFor.textContent = `Applied for ${dog.name}`;
+
+  // Show email if available
+  const email = document.createElement("p");
+  email.classList = "card-text";
+  email.textContent = "Email: " + user["email"];
+
+  // Show phone number if available
+  const phone = document.createElement("p");
+  phone.classList = "card-text";
+  phone.textContent = "Phone: " + user["phone"];
 
   const approve = document.createElement("button");
   approve.textContent = "Approve";
@@ -68,6 +82,8 @@ function buildApplicantCard(user, dog) {
   dogContainer.append(card);
   card.append(name);
   card.append(appliedFor);
+  card.append(email);
+  card.append(phone);
   card.append(approve);
   return dogContainer;
 }

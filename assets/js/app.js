@@ -51,7 +51,7 @@ function createCard(dog, owned = false, saved = false) {
 
   if (localStorage.getItem("token") && !owned && !saved) {
     const saveBtn = document.createElement("button");
-    saveBtn.classList = "btn btn-primary";
+    saveBtn.classList = "btn btn-primary save-btn";
     saveBtn.id = `saveBtn-${dog.id}`;
     saveBtn.textContent = "Save";
     saveBtn.onclick = saveForLater(dog.id);
