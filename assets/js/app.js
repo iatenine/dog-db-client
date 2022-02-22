@@ -43,7 +43,7 @@ async function getPlaceholder(dog, imgElement) {
   );
 }
 
-function createCard(dog, owned = false) {
+function createCard(dog, owned = false, saved = false) {
   dog["src"] = dog["src"] || "assets/media/JacksDog.jpg";
   const dogContainer = document.createElement("div");
   dogContainer.classList = "card";
@@ -56,8 +56,6 @@ function createCard(dog, owned = false) {
     saveBtn.textContent = "Save";
     saveBtn.onclick = saveForLater(dog.id);
     dogContainer.append(saveBtn);
-    console.log(saved);
-
   }
 
   const img = document.createElement("img");
@@ -160,7 +158,6 @@ function saveForLater(dogId) {
         `http://localhost:8080/applicants/save/${dogId}`,
         {}
       );
-      console.log(res);
       btnRef.disabled = true;
       btnRef.textContent = "Saved";
     } catch (err) {
@@ -215,7 +212,6 @@ function removeDogFromList(dog, isListing, button) {
       }`
     );
     const applicants = await res.text();
-    console.log(applicants);
 
     if (res.status == 200) {
       button.textContent = "Updated!";
@@ -261,13 +257,7 @@ function encodeBreed(breed) {
   return splitBreed.reverse().join("/");
 }
 
-getBreedNames().then((result) => {
-  console.log(result);
-  console.log("Encoded breed: ", encodeBreed("Labrador Retriever"));
-});
-
 async function populateBreedOptions(breedNameObject) {
-  // console.log(breedNames);
   const breedNames = await getBreedNames();
   const breedSelect = document.getElementById("dog-breed");
 

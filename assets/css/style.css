@@ -72,7 +72,7 @@ img {
 .container {
   position: relative;
   text-align: center;
-  color: white;
+  color: black;
 }
 
 /* Overlay text in middle of image */
@@ -81,4 +81,8 @@ img {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.btn {
+    padding:5px;
 }
