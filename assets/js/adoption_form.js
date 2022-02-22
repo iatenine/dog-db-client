@@ -12,8 +12,6 @@ async function listDog() {
   const size = getCheckedRadio(sizeRadios);
   const src = document.querySelector("#src").value;
 
-  console.log(dob); // Getting set off by a day
-
   // Breed only works when enums are available
 
   const res = await makeAuthenticatedRequest(
@@ -35,6 +33,8 @@ async function listDog() {
 
   if (res.status !== 200) {
     console.error("Something went wrong: ", res);
+  } else {
+    window.location.reload();
   }
 }
 
