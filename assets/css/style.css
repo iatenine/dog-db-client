@@ -81,7 +81,7 @@ img {
 .container {
   position: relative;
   text-align: center;
-  color: white;
+  color: black;
 }
 
 /* Overlay text in middle of image */
@@ -91,3 +91,5 @@ img {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+

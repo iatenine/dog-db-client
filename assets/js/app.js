@@ -263,7 +263,7 @@ async function populateBreedOptions(breedNameObject) {
 
   breedNames.forEach((breed) => {
     const option = document.createElement("option");
-    option.value = encodeBreed(breed);
+    option.value = breed;
     option.textContent = breed;
     breedSelect.append(option);
   });
