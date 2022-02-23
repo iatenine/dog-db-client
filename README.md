@@ -3,7 +3,7 @@
 ## Description
 
 <!-- Add screenshot of app running here -->
-!(screenshot of app running)[<img src="./dogDB-client.jpg" alt="Getting started" />]
+![screenshot of app running]("/dogDB-client.jpg")
 
 The Dog Adoption application is designed to allow users to view listings and apply to adopt dogs online. Additionally, users can login and register to the application. Once logged in, users may also add new adoption listings. Users may approve or reject applicants of listings they own.
 
